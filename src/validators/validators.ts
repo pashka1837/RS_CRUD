@@ -13,9 +13,9 @@ export function validateByUserId(userID: string) {
     };
 }
 
-export async function uuidValidate(userID: string) {
+export async function uuidValidate(userID: string): Promise<void> {
   return new Promise((res, rej) => {
     if (!validate(userID)) rej({ message: "Wrong user id", headStatus: "400" });
-    res(null);
+    else res();
   });
 }

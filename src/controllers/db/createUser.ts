@@ -1,11 +1,9 @@
-import { UserT } from "../../types/types";
+import { MyResolveMessageT, UserT } from "../../types/types";
 import { v4 as uuidv4 } from "uuid";
 
 import users from "../../utils/db";
 
-export default function createUser(
-  newUser: UserT
-): Promise<{ message: string; headStatus: string }> {
+export default function createUser(newUser: UserT): Promise<MyResolveMessageT> {
   return new Promise((res, rej) => {
     try {
       const isExists = users.find((user) => user.username === newUser.username);

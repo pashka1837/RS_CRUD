@@ -1,5 +1,7 @@
 import { IncomingMessage } from "node:http";
 import { MyResponseArgsT, MyResponseHeadT } from "../types/types";
+import routesAr from "../routes/routes";
+const dynamicRoutes = ["api/users", "api/posts"];
 
 export function myResponse({ res, data, head }: MyResponseArgsT) {
   res.writeHead(head.statusCode, (head.statusMessage = ""), head.headers);
@@ -30,25 +32,37 @@ function getCurURL(req: IncomingMessage) {
 }
 
 export function getReqParams(req: IncomingMessage) {
-  const curPathName = getCurURL(req);
+  let curPathName = getCurURL(req);
   const curMethod = req.method!;
-  const [splitedPathName, id] = curPathName.split(":");
+  // const id = curPathName.slice("api/users".length + 1);
+  let id = null;
 
-  if (!id) {
-    return { curPathName, curMethod, isDynamic: false };
+  for (let i = 0; i < dynamicRoutes.length; i++) {
+    const curRoute = dynamicRoutes.at(i)!;
+    if (!curPathName.includes(curRoute)) continue;
+    id = curPathName.slice(curRoute.length + 1);
+    if (id) {
+      curPathName = curRoute + "/:id";
+    }
+    break;
   }
-  return { curPathName: splitedPathName + ":id", curMethod, isDynamic: true };
+  return { curPathName, curMethod };
+
+  // if (!id) {
+  //   return { curPathName, curMethod, isDynamic: false };
+  // }
+  // return { curPathName: splitedPathName + ":id", curMethod, isDynamic: true };
 }
 
 /*parse data*/
 
 export function parseUserId(req: IncomingMessage) {
   const curPathName = getCurURL(req);
-  const id = curPathName.split(":").splice(1).at(0)!;
+  const id = curPathName.split("/").at(-1)!;
   return id;
 }
 
-export function parsePostBody(req: IncomingMessage) {
+export function parsePostBody(req: IncomingMessage): Promise<any> {
   return new Promise((res, rej) => {
     req.setEncoding("utf-8");
     let data = "";

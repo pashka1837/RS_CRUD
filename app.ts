@@ -3,8 +3,8 @@ import routesAr from "./src/routes/routes";
 import { getReqParams } from "./src/utils/utils";
 
 const server = createServer((req, res) => {
-  const { curPathName, curMethod, isDynamic } = getReqParams(req);
-  console.log(curPathName, curMethod, isDynamic);
+  const { curPathName, curMethod } = getReqParams(req);
+  console.log(curPathName, curMethod);
   let handler = routesAr[curPathName] && routesAr[curPathName][curMethod];
 
   if (!handler) {

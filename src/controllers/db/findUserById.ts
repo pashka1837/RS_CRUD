@@ -1,4 +1,4 @@
-import { MyMessage, UserWithId } from "../../types/types";
+import { UserWithId } from "../../types/types";
 import users from "../../utils/db";
 export async function findUserById(id: string): Promise<UserWithId> {
   return new Promise((res, rej) => {

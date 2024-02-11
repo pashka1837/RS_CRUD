@@ -1,5 +1,4 @@
-import { IncomingMessage } from "node:http";
-import { ControllerServerT, MyErrorT } from "../../types/types";
+import { ControllerServerT, MyResolveMessageT } from "../../types/types";
 import { parsePostBody, parseUserId } from "../../utils/utils";
 import { findUserById } from "../db/findUserById";
 import { uuidValidate } from "../../validators/validators";
@@ -17,7 +16,7 @@ const putUser: ControllerServerT = async (req) => {
       headStatus: "200",
     };
   } catch (error) {
-    const { message, headStatus } = error as MyErrorT;
+    const { message, headStatus } = error as MyResolveMessageT;
     return {
       data: { message },
       headStatus,

@@ -1,5 +1,5 @@
 import { parseUserId } from "../../utils/utils";
-import { ControllerServerT, MyErrorT } from "../../types/types";
+import { ControllerServerT, MyResolveMessageT } from "../../types/types";
 import { findUserById } from "../db/findUserById";
 import { uuidValidate } from "../../validators/validators";
 
@@ -13,7 +13,7 @@ const getUserById: ControllerServerT = async (req) => {
       headStatus: "200",
     };
   } catch (error) {
-    const { message, headStatus } = error as MyErrorT;
+    const { message, headStatus } = error as MyResolveMessageT;
     return {
       data: { message },
       headStatus,

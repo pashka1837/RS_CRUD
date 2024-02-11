@@ -1,7 +1,10 @@
 import { UserWithId } from "../../types/types";
 import users from "../../utils/db";
 
-export default async function updateUser(oldUser: UserWithId, updUser: any) {
+export default async function updateUser(
+  oldUser: UserWithId,
+  updUser: any
+): Promise<void> {
   return new Promise((res, rej) => {
     const newUser = oldUser as any;
     for (const key in updUser) {
@@ -13,7 +16,7 @@ export default async function updateUser(oldUser: UserWithId, updUser: any) {
       rej({ message: "Initial server error", headStatus: "500" });
     else {
       users.splice(indexOfOld, 1, newUser);
-      res(null);
+      res();
     }
   });
 }

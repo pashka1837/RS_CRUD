@@ -2,7 +2,6 @@ import { createHead, myResponse } from "../utils/utils";
 import { MyStatusT, RoutesT } from "../types/types";
 import users from "../utils/db";
 import getUserById from "../controllers/server/getUserById";
-import { pipeline } from "node:stream/promises";
 import postUser from "../controllers/server/postUser";
 import putUser from "../controllers/server/putUser";
 

@@ -26,9 +26,16 @@ type MyStatusT = {
   [key: string]: MyResponseHeadT;
 };
 
-type MyMessage = {
+type MyMessageT = {
   message: string;
 };
+
+type MyHeadStatusT = {
+  headStatus: string;
+};
+
+type MyResolveMessageT = MyMessageT & MyHeadStatusT;
+
 type MyUserT = {
   user: UserWithId;
 };
@@ -37,14 +44,9 @@ type MyUsersT = {
   users: (UserWithId | null)[];
 };
 
-type MyErrorT = {
-  message: string;
-  headStatus: string;
-};
-
 type MyResponseArgsT = {
   res: ServerResponse;
-  data: MyUserT | MyMessage | MyUsersT;
+  data: MyUserT | MyMessageT | MyUsersT;
   head: MyResponseHeadT;
 };
 
@@ -55,6 +57,6 @@ type RoutesT = {
 };
 
 type ControllerServerT = (req: IncomingMessage) => Promise<{
-  data: MyResponseArgsT["data"] | MyMessage;
+  data: MyResponseArgsT["data"] | MyMessageT;
   headStatus: string;
 }>;
