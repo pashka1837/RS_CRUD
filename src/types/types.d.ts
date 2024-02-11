@@ -35,3 +35,8 @@ type RoutesT = {
     [key: string]: (req: IncomingMessage | null, res: ServerResponse) => void;
   };
 };
+
+type ControllerServerT = (req: IncomingMessage) => Promise<{
+  data: UserT | string;
+  headStatus: string;
+}>;

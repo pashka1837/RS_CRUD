@@ -1,15 +1,10 @@
 import { validate as uuidValidate } from "uuid";
-import { IncomingMessage } from "node:http";
 import { parseUserId } from "../../utils/utils";
-import { UserT } from "../../types/types";
+import { ControllerServerT } from "../../types/types";
 import { findUserById } from "../db/findUserById";
 
-export default function getUserById(req: IncomingMessage): {
-  data: UserT | string;
-  headStatus: string;
-} {
+const getUserById: ControllerServerT = async (req) => {
   const userID = parseUserId(req!).trim();
-  console.log(userID);
   if (!uuidValidate(userID)) {
     return { data: "wrong user id", headStatus: "400" };
   }
@@ -24,4 +19,6 @@ export default function getUserById(req: IncomingMessage): {
     data: user,
     headStatus: "200",
   };
-}
+};
+
+export default getUserById;

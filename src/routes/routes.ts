@@ -25,9 +25,13 @@ const routesAr: RoutesT = {
     },
   },
   "api/users/:id": {
-    GET: (req, res) => {
-      const { data, headStatus } = getUserById(req!);
+    GET: async (req, res) => {
+      const { data, headStatus } = await getUserById(req!);
       myResponse({ res, data, head: head[headStatus] });
+    },
+    PUT: (req, res) => {
+      // const { data, headStatus } = getUserById(req!);
+      // myResponse({ res, data, head: head[headStatus] });
     },
   },
 };

@@ -1,8 +1,8 @@
-import { ServerResponse, IncomingMessage } from "node:http";
+import { ControllerServerT } from "../../types/types";
 import { createHead, myResponse, parsePostBody } from "../../utils/utils";
 import createUser from "../db/createUser";
 
-export default async function postUser(req: IncomingMessage) {
+const postUser: ControllerServerT = async (req) => {
   const newUser: any = await parsePostBody(req);
   if (
     !newUser.username ||
@@ -30,4 +30,6 @@ export default async function postUser(req: IncomingMessage) {
       headStatus: "500",
     };
   }
-}
+};
+
+export default postUser;
