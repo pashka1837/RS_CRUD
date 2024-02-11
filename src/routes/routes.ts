@@ -1,4 +1,5 @@
-import { myResponse } from "../utils/utils";
+import { validate as uuidValidate } from "uuid";
+import { getUserId, myResponse } from "../utils/utils";
 import { MyResponseHeadT, RoutesT } from "../types/types";
 import users from "../utils/db";
 
@@ -19,6 +20,8 @@ const routesAr: RoutesT = {
   },
   "api/users/:id": {
     GET: (req, res) => {
+      const userID = getUserId(req!);
+      if (uuidValidate(userID)) console.log(userID);
       const head: MyResponseHeadT = {
         statusCode: 200,
         statusMessage: "success",

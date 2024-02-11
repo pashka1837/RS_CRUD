@@ -33,6 +33,6 @@ export function getReqParams(req: IncomingMessage) {
 export function getUserId(req: IncomingMessage) {
   const curPathName = getCurURL(req);
   const curMethod = req.method!;
-  const [splitedPathName, id] = curPathName.split(":");
+  const id = curPathName.split(":").splice(1).at(0)!;
   return id;
 }
