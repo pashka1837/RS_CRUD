@@ -10,6 +10,8 @@ type UserIdT = {
   id: string;
 };
 
+type UserWithId = UserIdT & UserT;
+
 /* response*/
 
 type MyResponseHeadT = {
@@ -24,9 +26,25 @@ type MyStatusT = {
   [key: string]: MyResponseHeadT;
 };
 
+type MyMessage = {
+  message: string;
+};
+type MyUserT = {
+  user: UserWithId;
+};
+
+type MyUsersT = {
+  users: (UserWithId | null)[];
+};
+
+type MyErrorT = {
+  message: string;
+  headStatus: string;
+};
+
 type MyResponseArgsT = {
   res: ServerResponse;
-  data: ((UserT & UserIdT) | null)[] | string | UserT;
+  data: MyUserT | MyMessage | MyUsersT;
   head: MyResponseHeadT;
 };
 
@@ -37,6 +55,6 @@ type RoutesT = {
 };
 
 type ControllerServerT = (req: IncomingMessage) => Promise<{
-  data: UserT | string;
+  data: MyResponseArgsT["data"] | MyMessage;
   headStatus: string;
 }>;

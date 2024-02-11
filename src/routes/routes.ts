@@ -4,6 +4,7 @@ import users from "../utils/db";
 import getUserById from "../controllers/server/getUserById";
 import { pipeline } from "node:stream/promises";
 import postUser from "../controllers/server/postUser";
+import putUser from "../controllers/server/putUser";
 
 const head: MyStatusT = {
   "200": createHead(200, "success", "application/json"),
@@ -16,7 +17,7 @@ const head: MyStatusT = {
 const routesAr: RoutesT = {
   "api/users": {
     GET: (req, res) => {
-      const data = users;
+      const data = { users };
       myResponse({ res, data, head: head["200"] });
     },
     POST: async (req, res) => {
@@ -29,9 +30,9 @@ const routesAr: RoutesT = {
       const { data, headStatus } = await getUserById(req!);
       myResponse({ res, data, head: head[headStatus] });
     },
-    PUT: (req, res) => {
-      // const { data, headStatus } = getUserById(req!);
-      // myResponse({ res, data, head: head[headStatus] });
+    PUT: async (req, res) => {
+      const { data, headStatus } = await putUser(req!);
+      myResponse({ res, data, head: head[headStatus] });
     },
   },
 };

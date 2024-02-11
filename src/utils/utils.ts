@@ -57,10 +57,14 @@ export function parsePostBody(req: IncomingMessage) {
     });
     req.on("end", () => {
       try {
-        const body = data ? JSON.parse(data) : {};
-        res(body);
+        if (!data)
+          rej({
+            message: "Doesn't contain required fields",
+            headStatus: "400",
+          });
+        res(JSON.parse(data));
       } catch (error) {
-        rej({});
+        rej({ message: "Initial server error", headStatus: "500" });
       }
     });
   });

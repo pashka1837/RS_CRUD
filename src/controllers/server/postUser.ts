@@ -1,33 +1,33 @@
-import { ControllerServerT } from "../../types/types";
-import { createHead, myResponse, parsePostBody } from "../../utils/utils";
+import { ControllerServerT, MyErrorT } from "../../types/types";
+import { parsePostBody } from "../../utils/utils";
 import createUser from "../db/createUser";
 
 const postUser: ControllerServerT = async (req) => {
-  const newUser: any = await parsePostBody(req);
-  if (
-    !newUser.username ||
-    typeof newUser.username !== "string" ||
-    !newUser.age ||
-    typeof newUser.age !== "number" ||
-    !newUser.hobbies ||
-    !(newUser.hobbies instanceof Array)
-  ) {
-    return {
-      data: "Doesn't contain required fields",
-      headStatus: "400",
-    };
-  }
-
   try {
-    const dbRes = await createUser(newUser);
+    const newUser: any = await parsePostBody(req);
+    if (
+      !newUser.username ||
+      typeof newUser.username !== "string" ||
+      !newUser.age ||
+      typeof newUser.age !== "number" ||
+      !newUser.hobbies ||
+      !(newUser.hobbies instanceof Array)
+    ) {
+      return {
+        data: { message: "Doesn't contain required fields" },
+        headStatus: "400",
+      };
+    }
+    const { message, headStatus } = await createUser(newUser);
     return {
-      data: dbRes as string,
-      headStatus: "201",
+      data: { message },
+      headStatus: headStatus,
     };
-  } catch (er) {
+  } catch (error) {
+    const { message, headStatus } = error as MyErrorT;
     return {
-      data: er as string,
-      headStatus: "500",
+      data: { message },
+      headStatus: headStatus,
     };
   }
 };

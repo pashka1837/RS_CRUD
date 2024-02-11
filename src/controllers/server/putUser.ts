@@ -1,15 +1,19 @@
-import { parseUserId } from "../../utils/utils";
+import { IncomingMessage } from "node:http";
 import { ControllerServerT, MyErrorT } from "../../types/types";
+import { parsePostBody, parseUserId } from "../../utils/utils";
 import { findUserById } from "../db/findUserById";
 import { uuidValidate } from "../../validators/validators";
+import updateUser from "../db/updateUser";
 
-const getUserById: ControllerServerT = async (req) => {
+const putUser: ControllerServerT = async (req) => {
   const userID = parseUserId(req!).trim();
   try {
     await uuidValidate(userID);
-    const user = await findUserById(userID);
+    const oldUser = await findUserById(userID);
+    const updUser: any = await parsePostBody(req);
+    await updateUser(oldUser, updUser);
     return {
-      data: { user },
+      data: { message: "User was updated" },
       headStatus: "200",
     };
   } catch (error) {
@@ -21,4 +25,4 @@ const getUserById: ControllerServerT = async (req) => {
   }
 };
 
-export default getUserById;
+export default putUser;
