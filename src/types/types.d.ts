@@ -20,9 +20,13 @@ type MyResponseHeadT = {
   };
 };
 
+type MyStatusT = {
+  [key: string]: MyResponseHeadT;
+};
+
 type MyResponseArgsT = {
   res: ServerResponse;
-  data: ((UserT & UserIdT) | null)[];
+  data: ((UserT & UserIdT) | null)[] | string | UserT;
   head: MyResponseHeadT;
 };
 
@@ -31,7 +35,3 @@ type RoutesT = {
     [key: string]: (req: IncomingMessage | null, res: ServerResponse) => void;
   };
 };
-
-enum Methods {
-  GET = "GET",
-}

@@ -1,6 +1,6 @@
-import users from "../utils/db";
+import users from "../../utils/db";
 
-export default function getUserById(id: string) {
+export function findUserById(id: string) {
   const user = users.find((u) => u.id === id);
   if (user)
     return {

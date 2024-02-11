@@ -1,6 +1,5 @@
 import { createServer } from "node:http";
 import routesAr from "./src/routes/routes";
-import { Methods } from "./src/types/types";
 import { getReqParams } from "./src/utils/utils";
 
 const server = createServer((req, res) => {
