@@ -9,7 +9,7 @@ const users: (UserT & UserIdT)[] = [
     hobbies: ["snowboard", "hiking"],
   },
   {
-    id: "3a5be66d-95e8-41e2-b8f4-63ab7ba5d9b4xxx",
+    id: "3a5be66d-95e8-41e2-b8f4-63ab7ba5d9b4",
     username: "ololosha",
     age: 27,
     hobbies: ["bowling", "drinking"],

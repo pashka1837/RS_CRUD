@@ -8,7 +8,8 @@ export default function getUserById(req: IncomingMessage): {
   data: UserT | string;
   headStatus: string;
 } {
-  const userID = parseUserId(req!);
+  const userID = parseUserId(req!).trim();
+  console.log(userID);
   if (!uuidValidate(userID)) {
     return { data: "wrong user id", headStatus: "400" };
   }
