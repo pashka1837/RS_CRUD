@@ -1,7 +1,7 @@
 import { UserWithId } from "../../types/types";
 import users from "../../utils/db";
 
-export default async function updateUser(
+export default async function updateUserDB(
   oldUser: UserWithId,
   updUser: any
 ): Promise<void> {
@@ -13,7 +13,7 @@ export default async function updateUser(
     }
     const indexOfOld = users.findIndex((user) => user.id === newUser.id);
     if (indexOfOld === -1)
-      rej({ message: "Initial server error", headStatus: "500" });
+      rej({ message: "Internal Server Error", headStatus: "500" });
     else {
       users.splice(indexOfOld, 1, newUser);
       res();

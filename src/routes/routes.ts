@@ -1,37 +1,38 @@
-import { createHead, myResponse } from "../utils/utils";
-import { MyStatusT, RoutesT } from "../types/types";
-import users from "../utils/db";
-import getUserById from "../controllers/server/getUserById";
-import postUser from "../controllers/server/postUser";
-import putUser from "../controllers/server/putUser";
+import { myResponse } from "../utils/utils";
+import { RoutesT } from "../types/types";
+import {
+  getUserById,
+  postUser,
+  deleteUser,
+  putUser,
+  getUsers,
+} from "../controllers/server/index";
 
-const head: MyStatusT = {
-  "200": createHead(200, "success", "application/json"),
-  "201": createHead(201, "success", "text/plain"),
-  "400": createHead(400, "error 400", "text/plain"),
-  "404": createHead(404, "error 404", "text/plain"),
-  "500": createHead(500, "server error 500", "text/plain"),
-};
+import headStatuses from "../constants/headStatuses";
 
 const routesAr: RoutesT = {
   "api/users": {
-    GET: (req, res) => {
-      const data = { users };
-      myResponse({ res, data, head: head["200"] });
+    GET: async (req, res) => {
+      const { data, headStatus } = await getUsers(req!);
+      myResponse({ res, data, head: headStatuses[headStatus] });
     },
     POST: async (req, res) => {
       const { data, headStatus } = await postUser(req!);
-      myResponse({ res, data, head: head[headStatus] });
+      myResponse({ res, data, head: headStatuses[headStatus] });
     },
   },
   "api/users/:id": {
     GET: async (req, res) => {
       const { data, headStatus } = await getUserById(req!);
-      myResponse({ res, data, head: head[headStatus] });
+      myResponse({ res, data, head: headStatuses[headStatus] });
     },
     PUT: async (req, res) => {
       const { data, headStatus } = await putUser(req!);
-      myResponse({ res, data, head: head[headStatus] });
+      myResponse({ res, data, head: headStatuses[headStatus] });
+    },
+    DELETE: async (req, res) => {
+      const { data, headStatus } = await deleteUser(req!);
+      myResponse({ res, data, head: headStatuses[headStatus] });
     },
   },
 };

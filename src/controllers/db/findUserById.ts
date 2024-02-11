@@ -12,7 +12,7 @@ export async function findUserById(id: string): Promise<UserWithId> {
       else res(user);
     } catch {
       rej({
-        message: "Initial server error",
+        message: "Internal Server Error",
         headStatus: "500",
       });
     }
