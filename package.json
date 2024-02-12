@@ -8,8 +8,6 @@
     "start": "node build/app.js",
     "start:multi": "ts-node-dev app_multi.ts",
     "dev": "ts-node-dev app.ts",
-    "some": "nodemon --exec ts-node app.ts",
-    "some2": "ts-node --esm app.ts",
     "test": "jest"
   },
   "author": "Pavel K,",

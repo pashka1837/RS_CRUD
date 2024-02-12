@@ -3,8 +3,7 @@
   "compilerOptions": {
     "outDir": "./build",
     "target": "ES2022",    
-    "module": "CommonJS",     
-    // "moduleResolution": "",                               
+    "module": "CommonJS",                               
     "experimentalDecorators": true,
     "sourceMap": true,    
     "esModuleInterop": true,                            
@@ -12,9 +11,6 @@
     "strict": true,                                      
     "skipLibCheck": true                                 
   },
-  // "exclude": ["node_modules", "./*.ts", "__test__"],
-  // "ts-node": {
-  //   "esm": true, // «———— enabling ESM for ts-node
-  // },
+ 
   
 }

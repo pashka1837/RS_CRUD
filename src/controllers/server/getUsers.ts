@@ -6,11 +6,6 @@ import users from "../../utils/db";
 //I would already have getUsers controller
 
 const getUsers: ControllerServerT = async (req) => {
-  // const db = await import("../../db/db.json", {
-  //   assert: { type: "json" },
-  // });
-  // const myUsers = db.default.users;
-
   const myUsers = users;
 
   if (!myUsers)

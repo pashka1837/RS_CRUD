@@ -5,10 +5,6 @@ export default async function updateUserDB(
   oldUser: UserWithId,
   updUser: any
 ): Promise<UserWithId> {
-  // const db = await import("../../db/db.json", {
-  //   assert: { type: "json" },
-  // });
-  // const users = db.default.users;
   return new Promise((res, rej) => {
     const newUser = oldUser as any;
     for (const key in updUser) {

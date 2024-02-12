@@ -1,17 +1,4 @@
 import { validate } from "uuid";
-// import { findUserById } from "../controllers/db/index";
-
-// export function validateByUserId(userID: string) {
-//   if (!uuidValidate(userID)) {
-//     return { data: "wrong user id", headStatus: "400" };
-//   }
-//   const user = findUserById(userID);
-//   if (!user)
-//     return {
-//       data: "user with this id doesn't exist",
-//       headStatus: "404",
-//     };
-// }
 
 export async function validateUserFields(newUser: any): Promise<void> {
   return new Promise((res, rej) => {

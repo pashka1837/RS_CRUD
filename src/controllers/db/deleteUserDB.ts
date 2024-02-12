@@ -3,10 +3,6 @@ import users from "../../utils/db";
 export default async function deleteUserDB(
   idToDeleteUser: string
 ): Promise<void> {
-  // const db = await import("../../db/db.json", {
-  //   assert: { type: "json" },
-  // });
-  // const users = db.default.users;
   return new Promise((res, rej) => {
     const indexDeleteUser = users.findIndex(
       (user) => user.id === idToDeleteUser

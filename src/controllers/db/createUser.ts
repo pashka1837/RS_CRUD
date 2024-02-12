@@ -4,10 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 import users from "../../utils/db";
 
 export default async function createUser(newUser: UserT): Promise<UserWithId> {
-  // const db = await import("../../db/db.json", {
-  //   assert: { type: "json" },
-  // });
-  // const users = db.default.users;
   return new Promise((res, rej) => {
     try {
       const isExists = users.find((user) => user.username === newUser.username);
