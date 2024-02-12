@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "node dist/app.js",
+    "start": "node build/app.js",
     "dev": "ts-node-dev app.ts"
   },
   "author": "Pavel K,",
@@ -17,6 +17,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "dotenv": "^16.4.2",
     "uuid": "^9.0.1"
   }
 }
