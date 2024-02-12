@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { UserIdT, UserT } from "../types/types";
 
-const users: (UserT & UserIdT)[] = [
+let users: (UserT & UserIdT)[] = [
   {
     id: uuidv4(),
     username: "pashk",

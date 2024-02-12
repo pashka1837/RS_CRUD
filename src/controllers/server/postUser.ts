@@ -7,10 +7,10 @@ const postUser: ControllerServerT = async (req) => {
   try {
     const newUser = await parsePostBody(req);
     await validateUserFields(newUser);
-    const { message, headStatus } = await createUser(newUser);
+    const user = await createUser(newUser);
     return {
-      data: { message },
-      headStatus: headStatus,
+      data: { user },
+      headStatus: "201",
     };
   } catch (error) {
     const { message, headStatus } = error as MyResolveMessageT;

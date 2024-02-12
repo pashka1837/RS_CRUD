@@ -4,7 +4,11 @@ import users from "../../utils/db";
 export default async function updateUserDB(
   oldUser: UserWithId,
   updUser: any
-): Promise<void> {
+): Promise<UserWithId> {
+  // const db = await import("../../db/db.json", {
+  //   assert: { type: "json" },
+  // });
+  // const users = db.default.users;
   return new Promise((res, rej) => {
     const newUser = oldUser as any;
     for (const key in updUser) {
@@ -16,7 +20,7 @@ export default async function updateUserDB(
       rej({ message: "Internal Server Error", headStatus: "500" });
     else {
       users.splice(indexOfOld, 1, newUser);
-      res();
+      res(newUser);
     }
   });
 }

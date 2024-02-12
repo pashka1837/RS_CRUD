@@ -9,9 +9,9 @@ const putUser: ControllerServerT = async (req) => {
     await uuidValidate(userID);
     const oldUser = await findUserById(userID);
     const updUser: any = await parsePostBody(req);
-    await updateUserDB(oldUser, updUser);
+    const user = await updateUserDB(oldUser, updUser);
     return {
-      data: { message: "User was updated" },
+      data: { user },
       headStatus: "200",
     };
   } catch (error) {

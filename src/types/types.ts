@@ -60,3 +60,19 @@ type ControllerServerT = (req: IncomingMessage) => Promise<{
   data: MyResponseArgsT["data"] | MyMessageT;
   headStatus: string;
 }>;
+
+export {
+  UserT,
+  UserIdT,
+  UserWithId,
+  MyResponseHeadT,
+  MyStatusT,
+  MyMessageT,
+  MyHeadStatusT,
+  MyResolveMessageT,
+  MyUserT,
+  MyUsersT,
+  MyResponseArgsT,
+  RoutesT,
+  ControllerServerT,
+};
