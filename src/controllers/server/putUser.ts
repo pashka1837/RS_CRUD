@@ -1,8 +1,7 @@
 import { ControllerServerT, MyResolveMessageT } from "../../types/types";
 import { parsePostBody, parseUserId } from "../../utils/utils";
-import { findUserById } from "../db/findUserById";
+import { findUserById, updateUserDB } from "../db/index";
 import { uuidValidate } from "../../validators/validators";
-import updateUserDB from "../db/updateUserDB";
 
 const putUser: ControllerServerT = async (req) => {
   const userID = parseUserId(req!);

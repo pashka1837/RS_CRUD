@@ -1,7 +1,7 @@
 import { ControllerServerT, MyResolveMessageT } from "../../types/types";
 import { parsePostBody } from "../../utils/utils";
-import { validateUserFields } from "../../validations/validations";
-import createUser from "../db/createUser";
+import { validateUserFields } from "../../validators/validators";
+import { createUser } from "../db/index";
 
 const postUser: ControllerServerT = async (req) => {
   try {

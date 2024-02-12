@@ -2,6 +2,7 @@ import { IncomingMessage } from "node:http";
 import { MyResponseArgsT, MyResponseHeadT } from "../types/types";
 import dynamicRoutes from "../constants/dynamicRoutes";
 
+/*response handlers*/
 export function myResponse({ res, data, head }: MyResponseArgsT) {
   res.writeHead(head.statusCode, (head.statusMessage = ""), head.headers);
   res.write(JSON.stringify(data));
@@ -21,6 +22,8 @@ export function createHead(
     },
   };
 }
+
+/*get url params*/
 
 function getCurURL(req: IncomingMessage) {
   const curURL = new URL(`${req.url}`, `http://${req.headers.host}`);

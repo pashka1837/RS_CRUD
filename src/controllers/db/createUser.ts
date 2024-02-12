@@ -12,12 +12,13 @@ export default function createUser(newUser: UserT): Promise<MyResolveMessageT> {
           message: "User with this username is already exists",
           headStatus: "400",
         });
+      } else {
+        users.push({ ...newUser, id: uuidv4() });
+        res({
+          message: "User created",
+          headStatus: "201",
+        });
       }
-      users.push({ ...newUser, id: uuidv4() });
-      res({
-        message: "User created",
-        headStatus: "201",
-      });
     } catch {
       rej({
         message: "Initial server error",

@@ -1,6 +1,6 @@
 import { parseUserId } from "../../utils/utils";
 import { ControllerServerT, MyResolveMessageT } from "../../types/types";
-import { findUserById } from "../db/findUserById";
+import { findUserById } from "../db/index";
 import { uuidValidate } from "../../validators/validators";
 
 const getUserById: ControllerServerT = async (req) => {

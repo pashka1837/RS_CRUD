@@ -1,8 +1,7 @@
 import { ControllerServerT, MyResolveMessageT } from "../../types/types";
 import { parseUserId } from "../../utils/utils";
-import { findUserById } from "../db/findUserById";
+import { findUserById, deleteUserDB } from "../db/index";
 import { uuidValidate } from "../../validators/validators";
-import deleteUserDB from "../db/deleteUserDB";
 
 const deleteUser: ControllerServerT = async (req) => {
   const userID = parseUserId(req!);

@@ -35,5 +35,13 @@ const routesAr: RoutesT = {
       myResponse({ res, data, head: headStatuses[headStatus] });
     },
   },
+  "404": {
+    ALL: async (_req, res) => {
+      const data = {
+        message: "Not Found",
+      };
+      myResponse({ res, data, head: headStatuses["404"] });
+    },
+  },
 };
 export default routesAr;

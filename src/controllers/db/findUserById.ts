@@ -1,6 +1,7 @@
 import { UserWithId } from "../../types/types";
 import users from "../../utils/db";
-export async function findUserById(id: string): Promise<UserWithId> {
+
+export default async function findUserById(id: string): Promise<UserWithId> {
   return new Promise((res, rej) => {
     try {
       const user = users.find((u) => u.id === id);
