@@ -3,7 +3,7 @@ import { createServer } from "node:http";
 import routesAr from "./routes/routes";
 import { getReqParams } from "./utils/utils";
 
-export default function myServer() {
+export default function myServer(PORT = process.env.LOCAL_PORT!) {
   const server = createServer((req, res) => {
     const { curPathName, curMethod } = getReqParams(req);
     const handler = routesAr[curPathName]?.[curMethod]
@@ -13,8 +13,6 @@ export default function myServer() {
     handler(req, res);
   });
 
-  server.listen(process.env.LOCAL_PORT, () =>
-    console.log(`server listening on port: ${process.env.LOCAL_PORT}`)
-  );
+  server.listen(PORT, () => console.log(`server listening on port: ${PORT}`));
   return server;
 }

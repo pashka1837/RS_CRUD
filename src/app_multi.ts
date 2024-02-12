@@ -1,44 +1,28 @@
 import "dotenv/config";
 import cluster from "node:cluster";
-import http from "node:http";
 import { availableParallelism } from "node:os";
-import process from "node:process";
-import { normalize } from "node:path";
-import users from "./src/utils/db";
-
-import { dirname } from "path";
-// import { fileURLToPath } from "url";
-// const __dirname = dirname(fileURLToPath(import.meta.url));
-import { createServer, request } from "node:http";
-import routesAr from "./src/routes/routes";
-import { getReqParams, myResponse } from "./src/utils/utils";
-// require(__dirname);
+import myServer from "./server";
 
 const numCPUs = availableParallelism();
+
 let PORT = parseInt(process.env.LOCAL_PORT!);
 cluster.schedulingPolicy = cluster.SCHED_RR;
 
-let myUsers = users;
+if (cluster.isPrimary) {
+  for (let i = 0; i < numCPUs; i++) {
+    const worker = cluster.fork();
+    worker.send(`${PORT + i}`);
+  }
 
-cluster.setupPrimary({
-  exec: normalize(__dirname + "/worker.ts"),
-  silent: false,
-});
-console.log(normalize(__dirname + "/worker.ts"));
-
-for (let i = 0; i < numCPUs; i++) {
-  cluster.fork(__dirname + "/worker.ts");
-  // worker.send({ PORT: PORT + i, dbUsers: myUsers });
+  cluster.on("exit", (worker, code, signal) => {
+    console.log(`worker ${worker.process.pid} has been killed`);
+    console.log("Starting another worker");
+  });
+} else {
+  process.on("message", (d: string) => {
+    myServer(d);
+  });
 }
-cluster.on("exit", (worker, code, signal) => {
-  console.log(`worker ${worker.process.pid} has been killed`);
-  console.log("Starting another worker");
-  // cluster.fork();
-});
-
-cluster.on("message", (m) => {
-  console.log(m);
-});
 
 // if (cluster.isPrimary) {
 //   console.log(`Master server is running`);

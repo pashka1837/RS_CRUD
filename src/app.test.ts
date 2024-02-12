@@ -1,4 +1,4 @@
-import myServer from "./src/server";
+import myServer from "./server";
 
 describe("crud testing", () => {
   let server: any;
