@@ -1,5 +1,14 @@
 ### RS crud task
 
+#### Instructions:
+##### npm install to install all needed dependencies
+##### npm run start:dev to run in developmenmt mode
+##### npm run start:prod to run bundeled version in production mode
+##### npm run start:multi to run cluster version in development mode
+##### npm run test to test api
+
+##### app runs on port 3000
+
 #### Some notes:
 ##### regular server implemented correctly,
 ##### prod server implemented correctly,
